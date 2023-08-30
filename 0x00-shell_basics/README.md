@@ -1,1 +1,1 @@
-This task is to print the list contents in the present working directory.
+This task is to change user directory to home.
