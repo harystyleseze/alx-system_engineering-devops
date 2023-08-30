@@ -1,1 +1,1 @@
-This task is to change user directory to home.
+This task is to list contents in a directory in a long format.
