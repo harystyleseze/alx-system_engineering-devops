@@ -1,1 +1,1 @@
-This task is to move a file to a directory in the temporary directory path.
+This task is to delete a directory.
