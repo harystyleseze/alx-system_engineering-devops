@@ -1,1 +1,1 @@
-This task is to delete a directory.
+This task is to change directory to previous one.
