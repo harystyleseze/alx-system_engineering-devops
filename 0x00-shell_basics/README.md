@@ -1,1 +1,1 @@
-This task is to display contents in a current directory including hidden files.
+This task is to display contents in a current directory digitally.
