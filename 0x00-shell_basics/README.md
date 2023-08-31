@@ -1,1 +1,1 @@
-This task is to list contents in a directory in a long format.
+This task is to display contents in a current directory including hidden files.
