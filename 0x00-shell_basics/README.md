@@ -1,1 +1,1 @@
-This task is to change directory to previous one.
+This task is to print list contents in current, parent of working, and boot directories.
