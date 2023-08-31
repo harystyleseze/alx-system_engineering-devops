@@ -1,1 +1,1 @@
-This task is to create directories using parent flag.
+This task is to list file and directories in special order.
