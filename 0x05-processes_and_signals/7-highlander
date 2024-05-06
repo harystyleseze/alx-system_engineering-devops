@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Script to demonstrate handling of SIGTERM
+# Custom handler for SIGTERM
+
+trap 'echo "I am invincible!!!"' SIGTERM
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
+

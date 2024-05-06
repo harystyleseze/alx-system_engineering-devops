@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# displays the PIDs without using ps
+
+pgrep -l bash
+

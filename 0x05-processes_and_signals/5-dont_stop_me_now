@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Find PIDs of the '4-to_infinity_and_beyond' script and kill it
+# Requirement: You must use kill
+
+kill "$(pgrep -f 4-to_infinity_and_beyond)"
+

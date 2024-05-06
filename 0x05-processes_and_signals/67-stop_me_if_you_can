@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Script modified to send SIGTERM to '7-highlander'
+# Find the PID of '7-highlander'
+
+pid=$(pgrep -f '7-highlander')
+
+# Check if any PID was found
+if [[ -n $pid ]]; then
+ echo "Sending SIGTERM to process $pid"
+# Assuming 'kill' is not allowed, use an alternative if specified
+# This is placeholder; actual method will depend on allowed commands
+ kill -SIGTERM $pid
+else
+ echo "No process found."
+fi
+

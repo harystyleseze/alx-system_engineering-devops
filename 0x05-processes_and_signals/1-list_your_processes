@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Script to display a list of all running processes in a user-friendly format
+# Using 'ps' to display all processes
+
+ps auxf
+
