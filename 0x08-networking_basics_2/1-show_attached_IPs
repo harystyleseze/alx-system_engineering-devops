@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# displays all active IPv4 IPs on the machine it’s executed on.
+
+# List all interfaces and their IPs
+ip addr show | grep inet | grep -v inet6 | awk '{print $2}' | cut -d'/' -f1

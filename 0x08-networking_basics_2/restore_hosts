@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Define the backup file path
+backup_file="/etc/hosts.backup"
+
+# Check if the backup file exists
+if [ -f "$backup_file" ]; then
+    # Restore the backup file
+    sudo cp "$backup_file" /etc/hosts
+    echo "Restoration successful. The /etc/hosts file has been restored from backup."
+else
+    # Error message if backup file doesn't exist
+    echo "Error: Backup file does not exist. Cannot restore original settings."
+    exit 1
+fi
