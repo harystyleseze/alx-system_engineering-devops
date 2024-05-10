@@ -4,16 +4,8 @@
 # facebook.com resolves to 8.8.8.8.
 # The checker is running on Docker
 
-# Backup the existing hosts file
-cp /etc/hosts /etc/hosts.backup
-
-# Change localhost IP
-sed -i '/localhost/s/.*/127.0.0.2 localhost/' /etc/hosts
-
-# Redirect facebook.com
-if grep -q 'facebook.com' /etc/hosts; then
-  sed -i '/facebook.com/s/.*/8.8.8.8 facebook.com/' /etc/hosts
-else
-  echo '8.8.8.8 facebook.com' >> /etc/hosts
-fi
+cp /etc/hosts ~/hosts.new
+echo "127.0.0.2     localhost" > ~/hosts.new
+echo "8.8.8.8       facebook.com" >> ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
 
