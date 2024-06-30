@@ -1,0 +1,9 @@
+# This configuration uses the private key ~/.ssh/school and refuses password authentication
+Host *
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
+
