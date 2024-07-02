@@ -1,33 +1,20 @@
 #!/usr/bin/env bash
-# Configure Nginx to handle /redirect_me and custom 404 page
+# Configure Nginx server so that /redirect_me is redirecting to another page.
+# But the main domain still shows Hello world
 
-# Update and upgrade the package lists
 apt-get update -y && apt-get upgrade -y
-
-# Install Nginx
 apt-get install nginx -y
-
-# Ensure the ownership of the web directory
 chown -R "$USER":"$USER" /var/www/html
-
-# Create the "Hello World!" index page
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
+line="\\\\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
+sed -i "48i $line" /etc/nginx/sites-available/default
 
-# Add redirection configuration to Nginx
-redirect_line="\\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
-sed -i "48i $redirect_line" /etc/nginx/sites-available/default
-
-# Create directory for custom 404 page
 mkdir -p /var/www/default
-# Create the custom 404 page
 echo "Ceci n'est pas une page" > /var/www/default/404.html
+line1="\\\tlocation = /404.html {\n\t\t root /var/www/default;\n\t}"
+sed -i "29i $line1" /etc/nginx/sites-available/default
+line2="\\\terror_page 404 /404.html;"
+sed -i "32i $line2" /etc/nginx/sites-available/default
 
-# Add custom 404 page configuration to Nginx
-location_404="\\tlocation = /404.html {\n\t\troot /var/www/default;\n\t}"
-sed -i "29i $location_404" /etc/nginx/sites-available/default
-error_page_404="\\terror_page 404 /404.html;"
-sed -i "32i $error_page_404" /etc/nginx/sites-available/default
-
-# Restart Nginx to apply changes
 service nginx restart
 
