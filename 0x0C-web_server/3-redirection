@@ -5,20 +5,10 @@
 
 # Update and upgrade the package lists
 apt-get update -y && apt-get upgrade -y
-
-# Install Nginx web server
 apt-get install nginx -y
-
-# Ensure the web directory is owned by the current user
 chown -R "$USER":"$USER" /var/www/html
-
-# Create the custom index.html file with "Hello World!" message
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
-# Add the redirection rule to the Nginx configuration file
-redirect_block="\\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
-sed -i "/server_name _;/a $redirect_block" /etc/nginx/sites-available/default
-
-# Restart Nginx to apply the changes
+line="\\\\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
+sed -i "48i $line" /etc/nginx/sites-available/default
 service nginx restart
 
