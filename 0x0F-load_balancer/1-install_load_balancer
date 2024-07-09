@@ -17,8 +17,8 @@ listen load_balancer
     option httpclose
     option forwardfor
     balance roundrobin
-    server 109126-web-01 54.236.33.47:80 check
-    server 109126-web-02 35.175.135.250:80 check
+    server 527964-web-01 34.207.237.78:80 check
+    server 527964-web-02 34.207.237.147:80 check
 EOF
 
 # Restart HAProxy using init script to apply the new configuration
