@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Configure Nginx so that its HTTP response contains a custom header (on web-01 and web-02)
+# The name of the custom HTTP header must be X-Served-By
+# The value of the custom HTTP header must be the hostname of the server Nginx is running on
+
+# Update package list and install Nginx
+sudo apt-get update
+sudo apt-get -y install nginx
+
+# Configure firewall to allow HTTP traffic
+sudo ufw allow 'Nginx HTTP'
+
+# Create necessary directories and set permissions
+sudo mkdir -p /var/www/html
+sudo chmod -R 755 /var/www
+
+# Create the index and custom 404 pages
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+
+# Retrieve the hostname
+SERVER=$(hostname)
+
+# Nginx server block configuration
+SERVER_CONFIG="server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+    location / {
+        add_header X-Served-By $SERVER;
+        try_files \$uri \$uri/ =404;
+    }
+}"
+
+# Apply the configuration
+bash -c "echo -e '$SERVER_CONFIG' | sudo tee /etc/nginx/sites-available/default"
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
+# Restart Nginx to apply changes
+sudo systemctl restart nginx
+
